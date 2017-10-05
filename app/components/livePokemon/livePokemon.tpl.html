@@ -1,16 +1,16 @@
-<img alt="{{ pokemon.data.name }}" ng-src="{{ pokemon.data.sprites.front_default  || '' }}"/>
+<img alt="{{ $ctrl.pokemon.data.name }}" ng-src="{{ $ctrl.pokemon.data.sprites.front_default  || '' }}"/>
 <hr />
-name: {{ pokemon.data.name }}
+name: <a href="#" class="names">{{ $ctrl.pokemon.data.name }}</a>
 <br />
-height: {{ pokemon.data.height }} ft
+height: {{ $ctrl.pokemon.data.height }} ft
 <br />
-weight: {{ pokemon.data.weight }} lbs
+weight: {{ $ctrl.pokemon.data.weight }} lbs
 <br />
-<div ng-repeat='stat in pokemon.data.stats'>
+<div ng-repeat='stat in $ctrl.pokemon.data.stats'>
   {{ stat.stat.name }} - {{ stat.base_stat }}
 </div>
 <br />
-<div ng-repeat='type in pokemon.data.types'>
+<div ng-repeat='type in $ctrl.pokemon.data.types'>
   type(s): {{ type.type.name }}
 </div>
-<br / />
+<br />

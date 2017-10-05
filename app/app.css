@@ -1,0 +1,13 @@
+
+li {
+  padding: 5px;
+}
+
+/* Not gonna bother scrubbing the API data to capitalize the pkmn names - use CSS */
+a:first-letter {
+    text-transform: capitalize;
+}
+
+#MyPokemon {
+  padding: 10px;
+}
