@@ -1,0 +1,24 @@
+<!doctype html>
+<html ng-app="GetPokemon">
+  <head>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js"></script>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- My Stuff -->
+    <script src="./app.controller.js"></script>
+    <script src="./components/modal/modal.controller.js"></script>
+
+  </head>
+  <body>
+    <div class='container-fluid' ng-controller="GetPokemon">
+      <modal pokedex="pokedex" pokemon='team[0]' ></modal>
+      <button ng-click="testing()">test!</button>
+    </div>
+  </body>
+</html>
