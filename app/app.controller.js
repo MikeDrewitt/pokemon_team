@@ -38,8 +38,9 @@ GetPokemon.controller('GetPokemon', function($scope, $http) {
       alert($scope.searchValue + " is not a pokemon!");
     })
   };
+  $scope.closeSearch = function() { $scope.results = null; }
 
-  $scope.updateTeam = function() {
+  $scope.addToTeam = function() {
     if ($scope.team.length < 6) {
       $scope.team.push({...$scope.results, index: $scope.team.length});
 

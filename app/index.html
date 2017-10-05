@@ -12,26 +12,29 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <!-- My Stuff -->
+    <link rel="stylesheet" href="./app.css" />
     <script src="./app.controller.js"></script>
     <script src="./components/livePokemon/livePokemon.controller.js"></script>
 
   </head>
   <body>
-    <div class='container-fluid' ng-controller="GetPokemon">
+    <div class='container' ng-controller="GetPokemon">
       <form class="form-inline">
+        <label>Pokemon Lookup:</label>
         <input type="text" ng-model="searchValue" uib-typeahead="pkmn for pkmn in pokedex | filter:$viewValue | limitTo:8" class="form-control">
         <button class="btn" ng-click="getDetails()"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
       </form>
 
       <div ng-show='results' class="well">
         <live-pokemon pokemon="results"></live-pokemon>
-        <button class='btn' ng-click="updateTeam()"><span class='glyphicon glyphicon-plus'></span></button>
+        <button class='btn' ng-click="addToTeam()"><span class='glyphicon glyphicon-plus'></span></button>
+        <button class='btn' ng-click="closeSearch()"><span class='glyphicon glyphicon-remove-sign'></span></button>
       </div>
 
       <ol>
         <div class='myPokemon' ng-repeat="pokemon in team">
           <li>
-            {{ pokemon.data.name }}
+            <p>{{ pokemon.data.name }}</p>
             <button ng-click='indexUp(pokemon)'><span class="glyphicon glyphicon-arrow-up"></span></button>
             <button ng-click='indexDown(pokemon)'><span class="glyphicon glyphicon-arrow-down"></span></button>
             <button ng-click='removePokemon(pokemon)'><span class="glyphicon glyphicon-trash"></span></button>
