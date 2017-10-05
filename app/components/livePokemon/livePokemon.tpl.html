@@ -1,0 +1,16 @@
+<img alt="{{ pokemon.data.name }}" ng-src="{{ pokemon.data.sprites.front_default  || '' }}"/>
+<hr />
+name: {{ pokemon.data.name }}
+<br />
+height: {{ pokemon.data.height }} ft
+<br />
+weight: {{ pokemon.data.weight }} lbs
+<br />
+<div ng-repeat='stat in pokemon.data.stats'>
+  {{ stat.stat.name }} - {{ stat.base_stat }}
+</div>
+<br />
+<div ng-repeat='type in pokemon.data.types'>
+  type(s): {{ type.type.name }}
+</div>
+<br / />
