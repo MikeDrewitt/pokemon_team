@@ -17,8 +17,29 @@
   </head>
   <body>
     <div class='container-fluid' ng-controller="GetPokemon">
-      <modal pokedex="pokedex" pokemon='team[0]' ></modal>
-      <button ng-click="testing()">test!</button>
+      <form class="form-inline">
+        <input type="text" ng-model="searchValue" uib-typeahead="pokemon for pokemon in pokedex | filter:$viewValue | limitTo:8" class="form-control">
+        <button class="btn" ng-click="getDetails()"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+      </form>
+
+      <div ng-show='results' class="well">
+        <img alt="{{ results.data.name }}" ng-src="{{ results.data.sprites.front_default  || '' }}"/>
+        <hr />
+        name: {{ results.data.name }}
+        <br />
+        height: {{ results.data.height }} ft
+        <br />
+        weight: {{ results.data.weight }} lbs
+        <br />
+        <div ng-repeat='stat in results.data.stats'>
+          {{ stat.stat.name }} - {{ stat.base_stat }}
+        </div>
+        <br />
+        <div ng-repeat='type in results.data.types'>
+          type(s): {{ type.type.name }}
+        </div>
+      </div>
+
     </div>
   </body>
 </html>
