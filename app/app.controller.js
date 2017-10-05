@@ -6,7 +6,7 @@ GetPokemon.controller('GetPokemon', function($scope, $http) {
 
   // start with no pokes - probably not the best way to do this, would normally ping
   // an account info/ game info for a user. I don't feel like setting up users.
-  $scope.team  = [{}, {}, {}, {}, {}, {}];
+  $scope.team = [];
   // populated from the API as to always be up to date.
   $scope.pokedex = [];
 
@@ -26,7 +26,7 @@ GetPokemon.controller('GetPokemon', function($scope, $http) {
 
   $scope.testing = function() {
     console.log($scope.team);
-  }
+  };
 
   $scope.results = null;
   $scope.getDetails = function() {
@@ -42,4 +42,47 @@ GetPokemon.controller('GetPokemon', function($scope, $http) {
       alert($scope.searchValue + " is not a pokemon!");
     })
   };
+
+  $scope.updateTeam = function() {
+    if ($scope.team.length < 6) {
+      $scope.team.push({...$scope.results, index: $scope.team.length});
+
+      $scope.searchValue = '';
+      $scope.results = null;
+    }
+    else {
+      alert('Too many pokemans! Remove one before adding another!');
+    }
+  };
+
+  $scope.indexUp = function(pokemon) {
+    try {
+      let current_index = pokemon.index;
+      if (current_index == 0) return;
+      let temp = $scope.team[current_index - 1];
+
+      $scope.team[current_index - 1] = {...pokemon, index: current_index - 1};
+      $scope.team[current_index] = {...temp, index: current_index};
+
+      // console.log($scope.team);
+    } catch (err) {}
+  };
+
+  $scope.indexDown = function(pokemon) {
+    try {
+      let current_index = pokemon.index;
+      if (current_index == 5) return;
+      let temp = $scope.team[current_index + 1];
+
+      $scope.team[current_index + 1] = {...pokemon, index: current_index + 1};
+      $scope.team[current_index] = {...temp, index: current_index};
+
+      // console.log($scope.team);
+    } catch (err) {}
+  };
+
+  $scope.removePokemon = function(pokemon) {
+    let current_index = pokemon.index;
+    $scope.team.splice(current_index, 1);
+  }
 });

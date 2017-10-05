@@ -38,8 +38,21 @@
         <div ng-repeat='type in results.data.types'>
           type(s): {{ type.type.name }}
         </div>
+        <br / />
+        <button class='btn' ng-click="updateTeam()"><span class='glyphicon glyphicon-plus'></span></button>
       </div>
 
+
+      <ol>
+        <div class='myPokemon' ng-repeat="pokemon in team">
+          <li>
+            {{ pokemon.data.name }}
+            <button ng-click='indexUp(pokemon)'><span class="glyphicon glyphicon-arrow-up"></span></button>
+            <button ng-click='indexDown(pokemon)'><span class="glyphicon glyphicon-arrow-down"></span></button>
+            <button ng-click='removePokemon(pokemon)'><span class="glyphicon glyphicon-trash"></span></button>
+          </li>
+        </div>
+      </ol>
     </div>
   </body>
 </html>
