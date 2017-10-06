@@ -21,15 +21,15 @@
     <div class='container' ng-controller='Pokedex'>
       <form id='' class='form-inline'>
         <label>Pokemon Lookup:</label>
-        <input type='text' ng-model='searchValue' uib-typeahead='pkmn for pkmn in pokedex | filter:$viewValue | limitTo:8' class='form-control'>
+        <input type='text' ng-focus='getAllPokemon()' ng-model='searchValue' uib-typeahead='pkmn for pkmn in pokedex | filter:$viewValue | limitTo:8' class='form-control'>
         <button class='btn' ng-click='getDetails()'><span class='glyphicon glyphicon-search' aria-hidden='true'></span></button>
         <label>Generation:</label>
         <select class="form-control" ng-model="generation" ng-options="gen for gen in generations"></select>
       </form>
 
-      <div ng-show='results' class='well'>
-        <live-pokemon pokemon='results'></live-pokemon>
-        <button class='btn' ng-click='addToTeam()'><span class='glyphicon glyphicon-plus'></span></button>
+      <div ng-show='pkmn_result' class='well'>
+        <live-pokemon pokemon='pkmn_result'></live-pokemon>
+        <button class='btn' ng-click='addToTeam(pkmn_result)'><span class='glyphicon glyphicon-plus'></span></button>
         <button class='btn' ng-click='closeSearch()'><span class='glyphicon glyphicon-remove-sign'></span></button>
       </div>
 
@@ -39,7 +39,7 @@
             <a href='#' class='names'>{{ pokemon.data.name }}</a>
             <button ng-click='indexUp(pokemon)'><span class='glyphicon glyphicon-arrow-up'></span></button>
             <button ng-click='indexDown(pokemon)'><span class='glyphicon glyphicon-arrow-down'></span></button>
-            <button ng-click='removePokemon(pokemon)'><span class='glyphicon glyphicon-trash'></span></button>
+            <button ng-click='removeFromTeam(pokemon)'><span class='glyphicon glyphicon-trash'></span></button>
             <button ng-click='viewPokemon(pokemon)'><span class='glyphicon glyphicon-eye-open'></span></button>
           </li>
         </div>
@@ -50,9 +50,9 @@
         <button ng-click='closePokemon()'><span class='glyphicon glyphicon-eye-close'></span></button>
       </div>
 
-      <button ng-click='teamTyping()' id='TeamTyping'>
-        function test
-      </button>
+      <div ng-show='team.types'>
+        {{ team.types }}
+      </div>
 
     </div>
   </body>
