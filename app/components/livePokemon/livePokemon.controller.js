@@ -9,12 +9,7 @@
     };
   };
 
-  angular.module('Pokedex').component('livePokemon', {
-    templateUrl: './components/livePokemon/livePokemon.tpl.html',
-    contorller: LivePokemonController,
-    bindings: {
-      pokemon: '=',
-      hasMoves: '<'
-    }
-  });
-})(window.angular);
+  angular
+    .module('livePokemon.controller')
+    .controller('LivePokemonController', LivePokemonController);
+}) (window.angular);
