@@ -11,8 +11,8 @@
     // an account info/ game info for a user. I don't feel like setting up users.
     ctrl.searchValue = null;                  // initialize the state of the text box.
     ctrl.pkmn_result = null;                  // initialize pkmn_result.
-    ctrl.type_result = {};                  // initialize type api return.
-    ctrl.live_pokemon = null;                   // used to show the currently being edited mon'
+    ctrl.type_result = {};                    // initialize type api return.
+    ctrl.live_pokemon = null;                 // used to show the currently being edited mon'
     ctrl.team = {pokemon: [], types: {}};     // team of pokemon (should never be > 6)
     ctrl.pokedex = [];                        // populated from the API as to always be up to date.
 
