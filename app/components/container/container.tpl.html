@@ -1,20 +1,18 @@
 <div class='container' ng-controller='Pokedex'>
   <form id='' class='form-inline'>
     <label>Pokemon Lookup:</label>
-    <input type='text' ng-focus='getAllPokemon()' ng-model='searchValue' uib-typeahead='pkmn for pkmn in pokedex | filter:$viewValue | limitTo:8' class='form-control'>
-    <button class='btn' ng-click='getDetails()'><span class='glyphicon glyphicon-search' aria-hidden='true'></span></button>
-    <label>Generation:</label>
-    <select class="form-control" ng-model="generation" ng-options="gen for gen in generations"></select>
+    <input type='text' ng-focus='$ctrl.getAllPokemon()' ng-model='$ctrl.searchValue' uib-typeahead='pkmn for pkmn in $ctrl.pokedex | filter:$viewValue | limitTo:8' class='form-control'>
+    <button class='btn' ng-click='$ctrl.getDetails()'><span class='glyphicon glyphicon-search' aria-hidden='true'></span></button>
   </form>
 
-  <div ng-show='pkmn_result' class='well'>
-    <live-pokemon pokemon='pkmn_result'></live-pokemon>
-    <button class='btn' ng-click='addToTeam(pkmn_result)'><span class='glyphicon glyphicon-plus'></span></button>
-    <button class='btn' ng-click='closeSearch()'><span class='glyphicon glyphicon-remove-sign'></span></button>
+  <div ng-show='$ctrl.pkmn_result' class='well'>
+    <live-pokemon pokemon='$ctrl.pkmn_result'></live-pokemon>
+    <button class='btn' ng-click='$ctrl.addToTeam($ctrl.pkmn_result)'><span class='glyphicon glyphicon-plus'></span></button>
+    <button class='btn' ng-click='$ctrl.closeSearch()'><span class='glyphicon glyphicon-remove-sign'></span></button>
   </div>
 
   <ol id='MyPokemon'>
-    <div ng-repeat='pokemon in team.pokemon'>
+    <div ng-repeat='pokemon in $ctrl.team.pokemon | orderBy : "index"'>
       <li>
         <a href='#' class='names'>{{ pokemon.data.name }}</a>
         <button ng-click='indexUp(pokemon)'><span class='glyphicon glyphicon-arrow-up'></span></button>
@@ -25,13 +23,11 @@
     </div>
   </ol>
 
-  <div ng-show='live_pokemon' id='LivePokemon' class='well'>
-    <live-pokemon pokemon='live_pokemon' hasMoves='true'></live-pokemon>
-    <button ng-click='closePokemon()'><span class='glyphicon glyphicon-eye-close'></span></button>
+  <div ng-show='$ctrl.live_pokemon' id='LivePokemon' class='well'>
+    <live-pokemon pokemon='$ctrl.live_pokemon' hasMoves='true'></live-pokemon>
+    <button ng-click='$ctrl.closePokemon()'><span class='glyphicon glyphicon-eye-close'></span></button>
   </div>
 
-  <div ng-show='team.types'>
-    {{ team.types }}
-  </div>
+  <team-data team='$ctrl.team' ></team-data>
 
 </div>

@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/MikeDrewitt/pokemon_team/issues"
   },
-  "homepage": "https://github.com/MikeDrewitt/pokemon_team#readme"
+  "homepage": "https://github.com/MikeDrewitt/pokemon_team#readme",
+  "dependencies": {
+    "http-server": "^0.10.0"
+  }
 }

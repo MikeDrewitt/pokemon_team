@@ -11,7 +11,7 @@
 
   angular.module('Pokedex').component('livePokemon', {
     templateUrl: './components/livePokemon/livePokemon.tpl.html',
-    contorller: LivePokemonController,
+    controller: LivePokemonController,
     bindings: {
       pokemon: '=',
       hasMoves: '<'
