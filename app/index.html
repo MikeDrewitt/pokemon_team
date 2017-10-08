@@ -15,6 +15,7 @@
     <link rel='stylesheet' href='./app.css' />
     <script src='./app.controller.js'></script>
     <script src='./components/livePokemon/livePokemon.controller.js'></script>
+    <script src='./components/teamData/teamData.controller.js'></script>
 
   </head>
   <body>
@@ -34,7 +35,7 @@
       </div>
 
       <ol id='MyPokemon'>
-        <div ng-repeat='pokemon in team.pokemon'>
+        <div ng-repeat='pokemon in team.pokemon | orderBy : "index"'>
           <li>
             <a href='#' class='names'>{{ pokemon.data.name }}</a>
             <button ng-click='indexUp(pokemon)'><span class='glyphicon glyphicon-arrow-up'></span></button>
@@ -50,9 +51,7 @@
         <button ng-click='closePokemon()'><span class='glyphicon glyphicon-eye-close'></span></button>
       </div>
 
-      <div ng-show='team.types'>
-        {{ team.types }}
-      </div>
+      <team-data team='team' ></team-data>
 
     </div>
   </body>

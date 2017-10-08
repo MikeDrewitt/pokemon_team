@@ -8,7 +8,8 @@ Pokedex.controller('Pokedex', function($scope, $http) {
   // an account info/ game info for a user. I don't feel like setting up users.
   $scope.searchValue = null;                  // initialize the state of the text box.
   $scope.pkmn_result = null;                  // initialize pkmn_result.
-  $scope.live_pokemon = null;                 // used to show the currently being edited mon'
+  $scope.type_result = {};                  // initialize type api return.
+  $scope.live_pokemon = null;                   // used to show the currently being edited mon'
   $scope.team = {pokemon: [], types: {}};     // team of pokemon (should never be > 6)
   $scope.pokedex = [];                        // populated from the API as to always be up to date.
   // Doing it this way so it's easier to plug into the api.
@@ -44,7 +45,7 @@ Pokedex.controller('Pokedex', function($scope, $http) {
       $scope.pkmn_result = response;
       // console.log(response);
     }, function errorCallback(response) {
-      alert($scope.searchValue + " is not a pokemon!");
+      alert($scope.searchValue + " is not a pokemon or the API is down!");
     })
   };
   $scope.closeSearch = function() { $scope.pkmn_result = null; }
@@ -62,12 +63,17 @@ Pokedex.controller('Pokedex', function($scope, $http) {
       return;
     }
 
-    // This loop adds the typs to the type object
+    // This loop adds the types to the type object
     for (let j = 0; j < pokemon.data.types.length; j++) {
       let type = pokemon.data.types[j].type.name;
       // console.log('$scope.team.types', $scope.team.types[type]);
-
-      if ($scope.team.types[type] === undefined) $scope.team.types[type] = {...pokemon.data.types[j].type, count: 1};
+      if ($scope.team.types[type] === undefined) {
+        $scope.team.types[type] = {
+          ...pokemon.data.types[j].type,
+          api: null,
+          count: 1
+        };
+      }
       else {
         $scope.team.types[type] = {
           ...$scope.team.types[type],
@@ -75,7 +81,30 @@ Pokedex.controller('Pokedex', function($scope, $http) {
         };
       }
     }
-  };
+
+    /*
+    Let the above loop finish before waiting to add the type info
+    I think that there is a better place to get this info as to not hang the func.
+    I don't think it's as bad as I think it is because it only runs once per type
+    and one poke only has at most 2 types.
+    */
+    for (let j = 0; j < pokemon.data.types.length; j++) {
+      let type = pokemon.data.types[j].type.name;
+      let url = pokemon.data.types[j].type.url;
+
+      // if we've never gotten the type sub data
+      if ($scope.team.types[type].api === null) {
+        $http({method: 'GET', url: url}).
+        then(function(response) {
+          $scope.status = response.status;
+          $scope.team.types[type].api = response.data;
+        }, function(response) {
+          $scope.all_characters = response.all_characters || 'Request failed';
+          $scope.status = response.status;
+        });
+      };
+    }
+  }
   $scope.removeFromTeam = function(pokemon) {
     let current_index = pokemon.index;
     $scope.team.pokemon.splice(current_index, 1);
@@ -124,11 +153,12 @@ Pokedex.controller('Pokedex', function($scope, $http) {
 
   // shows a small amout of details of a single pokemon
   $scope.viewPokemon = function(pokemon) {
-      $scope.live_pokemon = pokemon;
+    $scope.live_pokemon = pokemon;
   };
   $scope.closePokemon = function(){
     $scope.live_pokemon = null;
   };
+
 });
 
 const emptyMovePool = {
