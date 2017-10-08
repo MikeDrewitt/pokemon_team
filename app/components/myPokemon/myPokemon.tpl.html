@@ -1,0 +1,20 @@
+<div>
+
+  <ol id='MyPokemon'>
+    <div ng-repeat='pokemon in $ctrl.team.pokemon | orderBy : "index"'>
+      <li>
+        <a href='#' class='names'>{{ pokemon.data.name }}</a>
+        <button ng-click='$ctrl.indexUp(pokemon)'><span class='glyphicon glyphicon-arrow-up'></span></button>
+        <button ng-click='$ctrl.indexDown(pokemon)'><span class='glyphicon glyphicon-arrow-down'></span></button>
+        <button ng-click='$ctrl.removeFromTeam(pokemon)'><span class='glyphicon glyphicon-trash'></span></button>
+        <button ng-click='$ctrl.viewPokemon(pokemon)'><span class='glyphicon glyphicon-eye-open'></span></button>
+      </li>
+    </div>
+  </ol>
+
+  <div ng-show='$ctrl.live_pokemon' id='LivePokemon' class='well'>
+    <live-pokemon pokemon='$ctrl.live_pokemon' hasMoves='true'></live-pokemon>
+    <button ng-click='$ctrl.closePokemon()'><span class='glyphicon glyphicon-eye-close'></span></button>
+  </div>
+
+</div>
