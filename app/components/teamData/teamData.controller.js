@@ -4,9 +4,12 @@
   function TeamDataController($scope, $http) {
     var ctrl = this;
     ctrl.strengths = {};
-    ctrl.showStrengths = false;
+    ctrl.weaknesses = {};
+    ctrl.showStrengths = true;
+    ctrl.showWeaknesses = true;
 
     ctrl.toggleStrengths = function() { ctrl.showStrengths = !ctrl.showStrengths };
+    ctrl.toggleWeaknesses = function() { ctrl.showWeaknesses = !ctrl.showWeaknesses };
 
     /*
     This function goes through and finds types
@@ -14,8 +17,8 @@
 
     It then places them into the strengths object
     */
-    ctrl.findStrengths = function() {
-      // console.log(ctrl.team);
+    ctrl.findStrengths = function(team) {
+      ctrl.strengths = {};
       for (let type in ctrl.team.types) {
         // console.log(ctrl.team.types[type].api.damage_relations.half_damage_from); // debug
         for (let j = 0; j < ctrl.team.types[type].api.damage_relations.half_damage_from.length; j++) {
@@ -44,6 +47,37 @@
       }
       console.log(ctrl.strengths);
       return ctrl.strengths;
+    };
+    ctrl.findWeaknesses = function(team) {
+      ctrl.weaknesses = {};
+      for (let type in ctrl.team.types) {
+        // console.log(ctrl.team.types[type].api.damage_relations.half_damage_from); // debug
+        for (let j = 0; j < ctrl.team.types[type].api.damage_relations.half_damage_to.length; j++) {
+          let subtype = ctrl.team.types[type].api.damage_relations.half_damage_to[j].name;
+
+          console.log(ctrl.weaknesses[subtype]);
+          if (ctrl.weaknesses[subtype] === undefined) ctrl.weaknesses[subtype] = {name: subtype, count: 1};
+          else {
+            ctrl.weaknesses[subtype] = {
+              name: subtype,
+              count: ctrl.weaknesses[subtype].count + 1
+            }
+          }
+        }
+        for (let j = 0; j < ctrl.team.types[type].api.damage_relations.double_damage_from.length; j++) {
+            let subtype = ctrl.team.types[type].api.damage_relations.double_damage_from[j].name;
+
+            if (ctrl.weaknesses[subtype] === undefined) ctrl.weaknesses[subtype] = {name: subtype, count: 1};
+            else {
+              ctrl.weaknesses[subtype] = {
+                ...ctrl.weaknesses[subtype],
+                count: ctrl.weaknesses[subtype].count + 1
+              }
+            }
+          }
+      }
+      console.log(ctrl.weaknesses);
+      return ctrl.weaknesses;
     };
 
     ctrl.testing = function() {

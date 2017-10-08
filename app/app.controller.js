@@ -12,9 +12,6 @@ Pokedex.controller('Pokedex', function($scope, $http) {
   $scope.live_pokemon = null;                   // used to show the currently being edited mon'
   $scope.team = {pokemon: [], types: {}};     // team of pokemon (should never be > 6)
   $scope.pokedex = [];                        // populated from the API as to always be up to date.
-  // Doing it this way so it's easier to plug into the api.
-  $scope.generations = ['generation-i', 'generatoin-ii', 'generation-iii', 'generation-iv', 'generation-v', 'generation-vi'];
-  $scope.generation = null;                   // the actual value of the drop down.
 
   // Runs on focusing search box to populate $pokedex with a list of pokemon.
   $scope.getAllPokemon = function() {

@@ -1,58 +1,68 @@
 <div>
 
-    <div id='typeTable'>
+  <div id='typeTable'>
 
-      <button class='btn' ng-click="$ctrl.toggleStrengths(); $ctrl.findStrengths()">Toggle Best Against</button>
+    <div>
+      <button class='btn' ng-click="$ctrl.toggleStrengths(); $ctrl.findStrengths()">Toggle Team Strength</button>
       <div ng-show='$ctrl.showStrengths'>
         <ol>
-          <div ng-repeat='type in $ctrl.strengths'>
+          <div ng-repeat='type in $ctrl.strengths' ng-model='$ctrl.strengths'>
             <li>{{ type.name }}</li>
           </div>
         </ol>
       </div>
-
-      <!--
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Type</th>
-            <th>Count</th>
-            <th>Weak Against</th>
-            <th>Stong Against</th>
-            <th>No Effect Towards</th>
-            <th>No Effect To</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr ng-repeat='type in $ctrl.team.types'>
-            <td>{{ type.name }}</td>
-            <td>{{ type.count }}</td>
-            <td>
-              <div  ng-repeat='subtype in type.api.damage_relations.double_damage_from'>
-                {{ subtype.name }}
-              </div>
-            </td>
-            <td>
-              <div ng-repeat='subtype in type.api.damage_relations.double_damage_to'>
-                {{ subtype.name }}
-              </div>
-            </td>
-            <td>
-              <div ng-repeat='subtype in type.api.damage_relations.no_damage_from'>
-                {{ subtype.name }}
-              </div>
-            </td>
-            <td>
-              <div ng-repeat='subtype in type.api.damage_relations.no_damage_to'>
-                {{ subtype.name }}
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      -->
     </div>
 
-    <button class='btn' ng-click='$ctrl.testing()'>Test</button>
+    <div>
+      <button class='btn' ng-click="$ctrl.toggleWeaknesses(); $ctrl.findWeaknesses()">Toggle Team Weaknesses</button>
+      <div ng-show='$ctrl.showWeaknesses'>
+        <ol>
+          <div ng-repeat='type in $ctrl.weaknesses' ng-model='$ctrl.weaknesses' ng-change='$ctrl.findWeaknesses($ctrl.team)'>
+            <li>{{ type.name }}</li>
+          </div>
+        </ol>
+      </div>
+    </div>
 
+    <!--
+    <table class="table table-striped">
+    <thead>
+    <tr>
+    <th>Type</th>
+    <th>Count</th>
+    <th>Weak Against</th>
+    <th>Stong Against</th>
+    <th>No Effect Towards</th>
+    <th>No Effect To</th>
+  </tr>
+</thead>
+<tbody>
+<tr ng-repeat='type in $ctrl.team.types'>
+<td>{{ type.name }}</td>
+<td>{{ type.count }}</td>
+<td>
+<div  ng-repeat='subtype in type.api.damage_relations.double_damage_from'>
+{{ subtype.name }}
+</div>
+</td>
+<td>
+<div ng-repeat='subtype in type.api.damage_relations.double_damage_to'>
+{{ subtype.name }}
+</div>
+</td>
+<td>
+<div ng-repeat='subtype in type.api.damage_relations.no_damage_from'>
+{{ subtype.name }}
+</div>
+</td>
+<td>
+<div ng-repeat='subtype in type.api.damage_relations.no_damage_to'>
+{{ subtype.name }}
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+-->
+</div>
 </div>

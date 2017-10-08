@@ -24,8 +24,6 @@
         <label>Pokemon Lookup:</label>
         <input type='text' ng-focus='getAllPokemon()' ng-model='searchValue' uib-typeahead='pkmn for pkmn in pokedex | filter:$viewValue | limitTo:8' class='form-control'>
         <button class='btn' ng-click='getDetails()'><span class='glyphicon glyphicon-search' aria-hidden='true'></span></button>
-        <label>Generation:</label>
-        <select class="form-control" ng-model="generation" ng-options="gen for gen in generations"></select>
       </form>
 
       <div ng-show='pkmn_result' class='well'>
