@@ -131,6 +131,11 @@
       $scope.live_pokemon = null;
     };
 
+    ctrl.go = function() {
+      conosle.log(ctrl.team);
+      console.log('printing...');
+    }
+
   };
 
   const emptyMovePool = {

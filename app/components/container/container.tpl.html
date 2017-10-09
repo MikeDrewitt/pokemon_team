@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 <div class='container' ng-controller='Pokedex'>
   <form id='' class='form-inline'>
     <label>Pokemon Lookup:</label>
@@ -12,6 +13,21 @@
     <button class='btn' ng-click='addToTeam(pkmn_result)'><span class='glyphicon glyphicon-plus'></span></button>
     <button class='btn' ng-click='closeSearch()'><span class='glyphicon glyphicon-remove-sign'></span></button>
   </div>
+=======
+<div>
+  <pokemon-search team='$ctrl.team'></pokemon-search>
+  <div class='container-fluid' id='MainContent'>
+
+    <button ng-click='$ctrl.go()'>Go!</button>
+
+    <!-- Displays if there are no pkmn on the team, explains application -->
+    <div class='well WellShadow' ng-if='$ctrl.team.pokemon.length < 1'>
+      <h3>Pokemon Team Statistics Application</h3>
+      <p>
+        This application will help show team statistics for all pokemon in party based on types, stats, and other characteristics of the team.
+      </p>
+    </div>
+>>>>>>> Stashed changes
 
   <ol id='MyPokemon'>
     <div ng-repeat='pokemon in team.pokemon'>
