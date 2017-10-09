@@ -6,13 +6,14 @@
 
     ctrl.showStrengths = true;                        // default showing bool
     ctrl.showWeaknesses = true;                       // default showing bool
-    ctrl.showData = false;                             // true for averge view false for sum
+    ctrl.showData = false;                            // true for averge view false for sum
 
     ctrl.sumStats = new Stats(0, 0, 0, 0, 0, 0);      // zeros all stats for recalculation && init
     ctrl.averageStats = new Stats(0, 0, 0, 0, 0, 0);  // ^^^^
 
     ctrl.toggleStrengths = function() { ctrl.showStrengths = !ctrl.showStrengths };
     ctrl.toggleWeaknesses = function() { ctrl.showWeaknesses = !ctrl.showWeaknesses };
+    ctrl.toggleData = function() { ctrl.showData = !ctrl.showData };
 
     /*
     This function goes through and finds types
@@ -70,7 +71,6 @@
 
     // calulates and populates the respective stats objects
     ctrl.mathStats = function() {
-
       let running_speed = 0,
       running_sp_atk = 0,
       running_sp_def = 0,
@@ -104,6 +104,24 @@
       ctrl.averageStats['hp'] = Math.round(running_hp / ctrl.team.pokemon.length);
     }
 
+    var previousType = undefined;
+    var previousPokemon = undefined;
+    this.$onInit = () => {
+      previousTypes = angular.copy(this.team.type);
+      previousTeam = angular.copy(this.team.pokemon);
+    };
+    this.$doCheck = () => {
+      if (!angular.equals(this.team.types, previousTypes)) {
+        ctrl.findStrengths();
+        ctrl.findWeaknesses();
+        previousTypes = angular.copy(this.team.types);
+      }
+
+      if (!angular.equals(this.team, previousTeam)) {
+        ctrl.mathStats();
+        previousTeam = angular.copy(this.team);
+      }
+    };
   };
 
   function Stats(speed, sp_atk, sp_def, atk, def, hp) {

@@ -3,10 +3,9 @@
 
     var ctrl = this;
 
-    ctrl.noPokemon = true;   // Should we see any pokes?
-
     // A flag telling us if we have any pkmns.
     ctrl.checkPokemonView = function() {
+      console.log('switch')
       ctrl.noPokemon = !(ctrl.team.pokemon.length < 1);
     }
 
@@ -63,7 +62,8 @@
     ctrl.closePokemon = function() {
       ctrl.live_pokemon = null;
     };
-  };
+
+};
 
   angular.module('Pokedex').component('myPokemon', {
     templateUrl: './components/myPokemon/myPokemon.tpl.html',

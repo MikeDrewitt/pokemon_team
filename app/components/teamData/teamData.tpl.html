@@ -1,11 +1,8 @@
 <div>
 
-  <h4>Team Data</h4>
-  <input type='checkbox' checked='' ng-model='$ctrl.showData' />
-
+  <button class='btn' ng-click='$ctrl.toggleData()'>Toggle Team Data</button>
   <div ng-show='$ctrl.showData'>
     <div id='overall_stats'>
-      {{ $ctrl.mathStats() }}
       <table class="table table-striped">
         <thead>
           <tr>
@@ -50,18 +47,17 @@
     </div>
 
     <div id='typeTable'>
-
       <div>
         <button class='btn' ng-click='$ctrl.toggleStrengths()'>Toggle Team Strength</button>
-        <div ng-show='$ctrl.showStrengths'>
-          {{ $ctrl.findStrengths() }}
+        <div ng-show='$ctrl.showStrengths' ng-repeat='(type, count) in $ctrl.strengths'>
+          {{ type }} , {{ count }}
         </div>
       </div>
 
       <div>
         <button class='btn' ng-click='$ctrl.toggleWeaknesses()'>Toggle Team Weaknesses</button>
-        <div ng-show='$ctrl.showWeaknesses'>
-          {{ $ctrl.findWeaknesses() }}
+        <div ng-show='$ctrl.showWeaknesses' ng-repeat='(type, count) in $ctrl.weaknesses'>
+          {{ type }} , {{ count }}
         </div>
       </div>
     </div>

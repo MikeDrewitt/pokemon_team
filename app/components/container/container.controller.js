@@ -19,6 +19,7 @@
     // Runs on focusing search box to populate $pokedex with a list of pokemon.
     ctrl.getAllPokemon = function() {
 
+      // if we already have the list of all pokemon don't do it again
       if (ctrl.pokedex.length !== 0) return;
 
       $http({method: 'GET', url: ctrl.url}).
