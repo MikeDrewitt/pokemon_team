@@ -1,0 +1,49 @@
+<form id='AddPokemon' class='form-inline container-fluid'>
+  <label>Pokemon Lookup:</label>
+  <input type='text' ng-focus='$ctrl.getAllPokemon()' ng-model='$ctrl.searchValue' uib-typeahead='pkmn for pkmn in $ctrl.pokedex | filter:$viewValue | limitTo:8' class='form-control'>
+  <button class='btn' ng-click='$ctrl.getDetails()' data-toggle="modal" data-target="#myModal"><span class='glyphicon glyphicon-search' aria-hidden='true'></span></button>
+</form>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Pokemon Results</h4>
+      </div>
+      <div class="modal-body">
+        <!-- Probably should be it's own component -->
+        <div ng-show='$ctrl.pkmn_result.name !== undefined' class='well'>
+          <live-pokemon pokemon='$ctrl.pkmn_result'></live-pokemon>
+          <button class='btn' ng-click='$ctrl.addToTeam($ctrl.pkmn_result)'><span class='glyphicon glyphicon-plus'></span></button>
+          <button class='btn' data-dismiss="modal" ng-click='$ctrl.closeSearch()'><span class='glyphicon glyphicon-remove-sign'></span></button>
+        </div>
+
+        <!-- If we have no result (yet) and we have some value -->
+        <div ng-if='$ctrl.searching' class='well'>
+          Searching ....
+        </div>
+
+        <!-- We have no search value -->
+        <div ng-if='!$ctrl.searchValue'>
+          <h4>Oops...</h4>
+          <hr />
+          <p>
+            Something went wrong! Either the search you entered was not a valid pokemon,
+            or the API was down :(
+          </p>
+          <hr />
+          <p>
+            Close and please try again!
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>

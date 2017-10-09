@@ -1,29 +1,16 @@
 <div ng-controller='Pokedex'>
+  <pokemon-search team='$ctrl.team'></pokemon-search>
+  <div class='container-fluid' id='MainContent'>
 
-  <div id='Navbar'>
-    <form id='AddPokemon' class='form-inline container-fluid'>
-      <label>Pokemon Lookup:</label>
-      <input type='text' ng-focus='$ctrl.getAllPokemon()' ng-model='$ctrl.searchValue' uib-typeahead='pkmn for pkmn in $ctrl.pokedex | filter:$viewValue | limitTo:8' class='form-control'>
-      <button class='btn' ng-click='$ctrl.getDetails()'><span class='glyphicon glyphicon-search' aria-hidden='true'></span></button>
-  </form>
-
-
-  <div class='container' id='MainContent'>
-
-    <!-- Probably should be it's own component -->
-    <div ng-show='$ctrl.pkmn_result' class='well'>
-      <live-pokemon pokemon='$ctrl.pkmn_result'></live-pokemon>
-      <button class='btn' ng-click='$ctrl.addToTeam($ctrl.pkmn_result)'><span class='glyphicon glyphicon-plus'></span></button>
-      <button class='btn' ng-click='$ctrl.closeSearch()'><span class='glyphicon glyphicon-remove-sign'></span></button>
-    </div>
-
-    <div class='well WellShadow' ng-if='$ctrl.team.pokemon.length < 1 && $ctrl.pkmn_result === null'>
+    <!-- Displays if there are no pkmn on the team, explains application -->
+    <div class='well WellShadow' ng-if='$ctrl.team.pokemon.length < 1'>
       <h3>Pokemon Team Statistics Application</h3>
       <p>
         This application will help show team statistics for all pokemon in party based on types, stats, and other characteristics of the team.
       </p>
     </div>
 
+    <!-- The meaty part of the app, when we actually have data -->
     <div ng-if='$ctrl.team.pokemon.length > 0'>
       <my-pokemon  team='$ctrl.team'></my-pokemon>
       <team-data team='$ctrl.team' ></team-data>

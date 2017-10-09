@@ -2,6 +2,7 @@
   function MyPokemonController() {
 
     var ctrl = this;
+    ctrl.live_pokemon = null;                 // used to show the currently being edited mon'
 
     // A flag telling us if we have any pkmns.
     ctrl.checkPokemonView = function() {
@@ -70,7 +71,6 @@
     controller: MyPokemonController,
     bindings: {
       team: '=',
-      livePokemon: '='
     }
   });
 })(window.angular);
