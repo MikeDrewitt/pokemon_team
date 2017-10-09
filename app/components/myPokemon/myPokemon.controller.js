@@ -1,15 +1,22 @@
 (function(angular) {
-  function TeamController() {
+  function MyPokemonController() {
 
     var ctrl = this;
+
+    ctrl.noPokemon = true;   // Should we see any pokes?
+
+    // A flag telling us if we have any pkmns.
+    ctrl.checkPokemonView = function() {
+      ctrl.noPokemon = !(ctrl.team.pokemon.length < 1);
+    }
 
     ctrl.removeFromTeam = function(pokemon) {
       let current_index = pokemon.index;
       ctrl.team.pokemon.splice(current_index, 1);
 
       // remove removed pokemons types from count of type object
-      for (let j = 0; j < pokemon.data.types.length; j++) {
-        let type = pokemon.data.types[j].type.name;
+      for (let j = 0; j < pokemon.types.length; j++) {
+        let type = pokemon.types[j].type.name;
         // console.log('ctrl.team.types', ctrl.team.types[type]);
 
         if (ctrl.team.types[type].count === 1) delete ctrl.team.types[type];
@@ -36,11 +43,11 @@
         // console.log(ctrl.team.pokemon);
       } catch (err) {}
     };
-    ctrl.indexDown = function(pokemon) {
+    ctrl.indexDown = function(pokemon) {``
       try {
         let current_index = pokemon.index;
         let temp = ctrl.team.pokemon[current_index + 1];
-        if (current_index === 5 || temp.data.name === undefined) return;
+        if (current_index === 5 || temp.name === undefined) return;
 
         ctrl.team.pokemon[current_index + 1] = {...pokemon, index: current_index + 1};
         ctrl.team.pokemon[current_index] = {...temp, index: current_index};
@@ -56,15 +63,14 @@
     ctrl.closePokemon = function() {
       ctrl.live_pokemon = null;
     };
-
   };
 
   angular.module('Pokedex').component('myPokemon', {
     templateUrl: './components/myPokemon/myPokemon.tpl.html',
-    controller: TeamController,
+    controller: MyPokemonController,
     bindings: {
       team: '=',
-      'livePokemon': '='
+      livePokemon: '='
     }
   });
 })(window.angular);

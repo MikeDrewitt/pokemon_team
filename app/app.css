@@ -3,11 +3,27 @@ li {
   padding: 5px;
 }
 
-/* Not gonna bother scrubbing the API data to capitalize the pkmn names - use CSS */
-a:first-letter {
+.FlexContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+#MoveSelectors {
+  width: 150px;
+  flex-direction: column;
+}
+
+#PokemonCard {
+  padding: 10px;
+  width: 350px;
+}
+
+#PokemonName:first-letter {
     text-transform: capitalize;
 }
 
-#MyPokemon {
+#PokemonOptions {
   padding: 10px;
 }

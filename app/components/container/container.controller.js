@@ -42,9 +42,10 @@
         method: 'GET',
         url: ctrl.url2 + ctrl.searchValue
       }).then(function successCallback(response) {
-        ctrl.pkmn_result = response;
+        ctrl.pkmn_result = response.data;
         // console.log(response);
       }, function errorCallback(response) {
+        ctrl.searchValue = '';
         alert(ctrl.searchValue + " is not a pokemon or the API is down!");
       })
     };
@@ -53,7 +54,7 @@
     ctrl.addToTeam = function(pokemon) {
       // This adds the param poke to the team if there are slots availible.
       if (ctrl.team.pokemon.length < 6) {
-        ctrl.team.pokemon.push({...pokemon, index: ctrl.team.pokemon.length, moves: emptyMovePool});
+        ctrl.team.pokemon.push({...pokemon, index: ctrl.team.pokemon.length, myMoves: new MovePool('', '', '', '')});
 
         ctrl.searchValue = '';
         ctrl.pkmn_result = null;
@@ -64,12 +65,12 @@
       }
 
       // This loop adds the types to the type object
-      for (let j = 0; j < pokemon.data.types.length; j++) {
-        let type = pokemon.data.types[j].type.name;
+      for (let j = 0; j < pokemon.types.length; j++) {
+        let type = pokemon.types[j].type.name;
         // console.log('ctrl.team.types', ctrl.team.types[type]);
         if (ctrl.team.types[type] === undefined) {
           ctrl.team.types[type] = {
-            ...pokemon.data.types[j].type,
+            ...pokemon.types[j].type,
             api: null,
             count: 1
           };
@@ -88,9 +89,9 @@
       I don't think it's as bad as I think it is because it only runs once per type
       and one poke only has at most 2 types.
       */
-      for (let j = 0; j < pokemon.data.types.length; j++) {
-        let type = pokemon.data.types[j].type.name;
-        let url = pokemon.data.types[j].type.url;
+      for (let j = 0; j < pokemon.types.length; j++) {
+        let type = pokemon.types[j].type.name;
+        let url = pokemon.types[j].type.url;
 
         // if we've never gotten the type sub data
         if (ctrl.team.types[type].api === null) {
@@ -107,11 +108,11 @@
     }
   };
 
-  const emptyMovePool = {
-    1: {},
-    2: {},
-    3: {},
-    4: {}
+  function MovePool(one, two, three, four) {
+    this.one = one;
+    this.two = two;
+    this.three = three;
+    this.four = four;
   };
 
   angular.module('Pokedex').component('container', {
