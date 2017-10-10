@@ -2,7 +2,11 @@
 
   function ContainerController($scope) {
 
-    $scope.team = {pokemon: [], types: {}};     // team of pokemon (should never be > 6)
+    $scope.team = { pokemon: [], types: {} };     // team of pokemon (should never be > 6)
+
+    $scope.test = function() {
+      console.log('parent:', $scope.team);
+    }
   };
 
   angular.module('pokedex.config').component('container', {

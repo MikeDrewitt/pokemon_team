@@ -9,8 +9,7 @@
     templateUrl: './components/livePokemon/livePokemon.tpl.html',
     controller: LivePokemonController,
     bindings: {
-      pokemon: '=',
-      hasMoves: '<'
+      pokemon: '<',
     }
   }).controller('LivePokemonController', LivePokemonController);
 })(window.angular);
