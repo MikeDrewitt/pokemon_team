@@ -1,12 +1,15 @@
 (function(angular) {
   function TeamDataController() {
     var ctrl = this;
-    ctrl.strengths = {};                            // object of stauff that we are strong against attacking and def
-    ctrl.weaknesses = {};                           // object of stuff we're weak against attacking and defending
+
+    ctrl.half_damage_to = [];                         // list of stuff that we have weak atk against
+    ctrl.half_damage_from = [];                       // list of stuff that we have weak def against
+    ctrl.double_damage_to = [];                       // list of stuff that we have strong atk against
+    ctrl.double_damage_from = [];                     // list of stuff that we have weak def against
 
     ctrl.showStrengths = true;                        // default showing bool
     ctrl.showWeaknesses = true;                       // default showing bool
-    ctrl.showData = false;                            // true for averge view false for sum
+    ctrl.showData = true;                            // true for averge view false for sum
 
     ctrl.sumStats = new Stats(0, 0, 0, 0, 0, 0);      // zeros all stats for recalculation && init
     ctrl.averageStats = new Stats(0, 0, 0, 0, 0, 0);  // ^^^^
@@ -16,57 +19,30 @@
     ctrl.toggleData = function() { ctrl.showData = !ctrl.showData };
 
     /*
-    This function goes through and finds types
-    that deal half damage to you, and you deal double damage to.
+      @params -
+        damage_field: the name of the subobjest in the API that refers to the type of damage
+                      modifyer we want to access. ie: half_damage_to, double_damage_from, etc.
 
-    It then places them into the strengths object
+      @returns - an array of stats modifyers and counts for how often the appear for the team.
     */
-    ctrl.findStrengths = function(team) {
-      ctrl.strengths = {};
+    ctrl.findDamageInfo = function(damage_field) {
+      let typeStatsList = [];
+      let running_data = {};
+
       for (let type in ctrl.team.types) {
-        // console.log(ctrl.team.types[type].api.damage_relations.half_damage_from); // debug
         if (ctrl.team.types[type].api === null) continue;
-        for (let j = 0; j < ctrl.team.types[type].api.damage_relations.half_damage_from.length; j++) {
-          let subtype = ctrl.team.types[type].api.damage_relations.half_damage_from[j].name;
+        for (let j = 0; j < ctrl.team.types[type].api.damage_relations[damage_field].length; j++) {
+          let subtype = ctrl.team.types[type].api.damage_relations[damage_field][j].name;
 
           // if we are not counting that subtype then set to 1 else inc.
-          if (ctrl.strengths[subtype] === undefined) ctrl.strengths[subtype] = 1;
-          else ctrl.strengths[subtype] += 1;
-        }
-        if (ctrl.team.types[type].api === null) continue;
-        for (let j = 0; j < ctrl.team.types[type].api.damage_relations.double_damage_to.length; j++) {
-          let subtype = ctrl.team.types[type].api.damage_relations.double_damage_to[j].name;
-
-          // if we are not counting that subtype then set to 1 else inc.
-          if (ctrl.strengths[subtype] === undefined) ctrl.strengths[subtype] = 1;
-          else ctrl.strengths[subtype] += 1;
+          if (running_data[subtype] === undefined) running_data[subtype] = 1;
+          else running_data[subtype] += 1;
         }
       }
-      // console.log(ctrl.strengths);
-      return ctrl.strengths;
-    };
-    ctrl.findWeaknesses = function(team) {
-      ctrl.weaknesses = {};
-      for (let type in ctrl.team.types) {
-        // console.log('api', ctrl.team.types[type].api); // debug
-        if (ctrl.team.types[type].api === null) continue;
-        for (let j = 0; j < ctrl.team.types[type].api.damage_relations.half_damage_to.length; j++) {
-          let subtype = ctrl.team.types[type].api.damage_relations.half_damage_to[j].name;
-
-          // console.log(ctrl.weaknesses[subtype]);
-          if (ctrl.weaknesses[subtype] === undefined) ctrl.weaknesses[subtype] = 1;
-          else ctrl.strengths[subtype] += 1;
-        }
-        if (ctrl.team.types[type].api === null) continue;
-        for (let j = 0; j < ctrl.team.types[type].api.damage_relations.double_damage_from.length; j++) {
-          let subtype = ctrl.team.types[type].api.damage_relations.double_damage_from[j].name;
-
-          if (ctrl.weaknesses[subtype] === undefined) ctrl.weaknesses[subtype] = 1;
-          else ctrl.strengths[subtype] += 1;
-        }
+      for (let key in running_data) {
+        typeStatsList.push({ name: key, count: running_data[key] });
       }
-      // console.log(ctrl.weaknesses);
-      return ctrl.weaknesses;
+      return typeStatsList;
     };
 
     // calulates and populates the respective stats objects
@@ -112,8 +88,11 @@
     };
     this.$doCheck = () => {
       if (!angular.equals(this.team.types, previousTypes)) {
-        ctrl.findStrengths();
-        ctrl.findWeaknesses();
+        ctrl.half_damage_to = ctrl.findDamageInfo('half_damage_to');
+        ctrl.half_damage_from = ctrl.findDamageInfo('half_damage_from');
+        ctrl.double_damage_to = ctrl.findDamageInfo('double_damage_to');
+        ctrl.double_damage_from = ctrl.findDamageInfo('double_damage_from');
+
         previousTypes = angular.copy(this.team.types);
       }
 

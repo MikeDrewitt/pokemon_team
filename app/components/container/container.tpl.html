@@ -1,14 +1,31 @@
 <div ng-controller='mainCtrl'>
-  <pokemon-search team='team'></pokemon-search>
-  <div class='container-fluid' id='MainContent'>
+  <div id='MainContent'>
 
     <!-- Displays if there are no pkmn on the team, explains application -->
     <div class='well WellShadow' ng-if='team.pokemon.length < 1'>
       <h3>Pokemon Team Statistics Application</h3>
       <p>
-        This application will help show team statistics for all pokemon in party based on types, stats, and other characteristics of the team.
+        This application will help show team statistics for all pokemon in party
+        based on types, stats, and other characteristics of the team. It will allow
+        you to change the moveset of each pokemon within their legal moves.
       </p>
+      <hr />
+      <p>
+        The navbar above will lead you to an index of all availible pokemon
+        should you want to do more research on one before adding it to your team.
+        To add your first pokemon, use the below search field to find it. Once the query
+        returns you'll be able to add it to the team with the + icon.
+      </p>
+      <hr />
+      <h4>Some things to note</h4>
+      <ul id='ImportantInfo'>
+        <li>This box will go away once you add your first pokemon.</li>
+        <li>If you refresh/ leave this page your team will not persist, as there is no DB setup.</li>
+      </ul>
     </div>
+
+    <!-- Calls the modals, searches for mons to add to the team -->
+    <pokemon-search team='team'></pokemon-search>
 
     <!-- The meaty part of the app, when we actually have data -->
     <div ng-if='team.pokemon.length > 0'>

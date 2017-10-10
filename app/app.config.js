@@ -4,10 +4,15 @@
     .constant('urlConstant', { baseUrl: 'http://localhost:8080' })
     .config(function($urlRouterProvider, $stateProvider, $locationProvider) {
       $stateProvider
-      .state('home', {
+      .state('my_team', {
         url: '/',
         templateUrl: '/components/container/container.tpl.html',
         controller: 'ContainerController'
+      })
+      .state('pokemon', {
+        url: '/pokemon?pokemon',
+        templateUrl: '/components/pokemonData/pokemonData.tpl.html',
+        controller: 'PokemonDataController'
       })
       $urlRouterProvider.otherwise('/');
   });

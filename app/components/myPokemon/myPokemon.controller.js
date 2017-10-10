@@ -2,7 +2,6 @@
   function MyPokemonController($scope) {
 
     $scope.live_pokemon = null;                 // used to show the currently being edited mon'
-    console.log('running?');
 
     // A flag telling us if we have any pkmns.
     $scope.checkPokemonView = function() {

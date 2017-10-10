@@ -1,7 +1,7 @@
 <div>
 
-  <button class='btn' ng-click='$ctrl.toggleData()'>Toggle Team Data</button>
-  <div ng-show='$ctrl.showData'>
+  <button class='btn ToggleButton' ng-click='$ctrl.toggleData()'>Toggle Team Data</button>
+  <div ng-show='$ctrl.showData' class='well'>
     <div id='overall_stats'>
       <table class="table table-striped">
         <thead>
@@ -48,16 +48,41 @@
 
     <div id='typeTable'>
       <div>
-        <button class='btn' ng-click='$ctrl.toggleStrengths()'>Toggle Team Strength</button>
-        <div ng-show='$ctrl.showStrengths' ng-repeat='(type, count) in $ctrl.strengths'>
-          {{ type }} , {{ count }}
-        </div>
-      </div>
-
-      <div>
-        <button class='btn' ng-click='$ctrl.toggleWeaknesses()'>Toggle Team Weaknesses</button>
-        <div ng-show='$ctrl.showWeaknesses' ng-repeat='(type, count) in $ctrl.weaknesses'>
-          {{ type }} , {{ count }}
+        <button class='btn ToggleButton' ng-click='$ctrl.toggleStrengths()'>Toggle Team Strength</button>
+        <button class='btn ToggleButton' ng-click='$ctrl.toggleWeaknesses()'>Toggle Team Strength</button>
+        <div class='FlexContainer'>
+          <div ng-show='$ctrl.showStrengths' class='well WellShadow Statsbox'>
+            <h4>Strongest attacking against</h4>
+            <ol>
+              <div ng-repeat='type in $ctrl.double_damage_to | orderBy: "count" | limitTo:5'>
+                <li>{{ type.name }}</li>
+              </div>
+            </ol>
+          </div>
+          <div ng-show='$ctrl.showStrengths' class='well WellShadow Statsbox'>
+            <h4>Strongest defending against</h4>
+            <ol>
+              <div ng-repeat='type in $ctrl.half_damage_from | orderBy: "count" | limitTo:5'>
+                <li>{{ type.name }}</li>
+              </div>
+            </ol>
+          </div>
+          <div ng-show='$ctrl.showWeaknesses' class='well WellShadow Statsbox'>
+            <h4>Weakest attacking against</h4>
+            <ol>
+              <div ng-repeat='type in $ctrl.half_damage_to | orderBy: "count" | limitTo:5'>
+                <li>{{ type.name }}</li>
+              </div>
+            </ol>
+          </div>
+          <div ng-show='$ctrl.showWeaknesses' class='well WellShadow Statsbox' >
+              <h4>Weakest defending against</h4>
+              <ol>
+                <div ng-repeat='type in $ctrl.double_damage_from | orderBy: "count" | limitTo:5'>
+                  <li>{{ type.name }}</li>
+                </div>
+              </ol>
+            </div>
         </div>
       </div>
     </div>

@@ -27,13 +27,24 @@
           <button title='Move up in team.' class='btn' ng-click='indexUp(pokemon)'><span class='glyphicon glyphicon-arrow-up'></span></button>
           <button title='Move down in team.' class='btn' ng-click='indexDown(pokemon)'><span class='glyphicon glyphicon-arrow-down'></span></button>
           <button title='Remove from team.' class='btn' ng-click='removeFromTeam(pokemon)'><span class='glyphicon glyphicon-trash'></span></button>
-          <button title='View stats.' class='btn' ng-click='viewPokemon(pokemon)'><span class='glyphicon glyphicon-eye-open'></span></button>
+          <!-- <button title='View pokemon info.' class='btn' ng-click='viewPokemon(pokemon)' data-toggle="modal" data-target="#PokemonDetails"><span class='glyphicon glyphicon-eye-open'></span></button> -->
         </div>
       </div>
     </div>
   </div>
-  <div ng-show='live_pokemon' id='LivePokemon' class='well'>
-    <live-pokemon pokemon='live_pokemon' hasMoves='true'></live-pokemon>
-    <button class='btn' ng-click='closePokemon()'><span class='glyphicon glyphicon-eye-close'></span></button>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="PokemonDetails" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-body">
+        <live-pokemon pokemon='live_pokemon'></live-pokemon>
+        <button title='Close window.' class='btn btn-danger' data-dismiss="modal" ng-click='closePokemon()'><span class='glyphicon glyphicon-eye-close'></span></button>
+      </div>
+    </div>
+
   </div>
 </div>

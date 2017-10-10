@@ -1,37 +1,52 @@
 <!doctype html>
 <html ng-app='Pokedex'>
-  <head>
+<head>
 
-    <base href='/' />
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <base href='/' />
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Pokemon Team Builder</title>
+  <title>Pokemon Team Builder</title>
 
-    <script src='//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.js'></script>
-    <script src='//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.js'></script>
-    <script src='//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js'></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.min.js"></script>
-    <script src='//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.1.3.js'></script>
+  <script src='//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.js'></script>
+  <script src='//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.js'></script>
+  <script src='//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js'></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.min.js"></script>
+  <script src='//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.1.3.js'></script>
 
-    <!-- Bootstrap -->
-    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
-    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
+  <!-- Bootstrap -->
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
+  <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+  <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
 
-    <!-- My Stuff -->
-    <link rel='stylesheet' href='./static/css/app.css' />
+  <!-- My Stuff -->
+  <link rel='stylesheet' href='./static/css/app.css' />
 
-    <script src='./app.module.js'></script>
-    <script src='./app.config.js'></script>
-    <script src='./components/pokemonSearch/pokemonSearch.controller.js'></script>
-    <script src='./components/myPokemon/myPokemon.controller.js'></script>
-    <script src='./components/teamData/teamData.controller.js'></script>
-    <script src='./components/container/container.controller.js'></script>
-    <script src='./components/livePokemon/livePokemon.controller.js'></script>
+  <script src='./app.module.js'></script>
+  <script src='./app.config.js'></script>
+  <script src='./components/container/container.controller.js'></script>
+  <script src='./components/pokemonSearch/pokemonSearch.controller.js'></script>
+  <script src='./components/myPokemon/myPokemon.controller.js'></script>
+  <script src='./components/teamData/teamData.controller.js'></script>
+  <script src='./components/livePokemon/livePokemon.controller.js'></script>
 
-  </head>
-  <body ng-app='Pokedex' ng-controller='mainCtrl'>
+  <script src='./components/pokemonData/pokemonData.controller.js'></script>
+
+</head>
+<body ng-app='Pokedex' ng-controller='mainCtrl'>
+
+  <nav class="navbar navbar-default navbar-static-top navbar-inverse" role="navigation">
+    <div class="navbar-header">
+      <a class="navbar-brand" ui-sref="#">Pokemon Data Library</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a ui-sref="my_team">My Team</a></li>
+      <li><a ui-sref="pokemon({pokemon: ''})">Pokemon</a></li>
+    </ul>
+  </nav>
+
+  <div class='container-fluid'>
     <div ui-view></div>
-  </body>
+  </div>
+</body>
 </html>

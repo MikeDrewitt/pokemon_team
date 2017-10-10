@@ -1,3 +1,67 @@
-<div>
-  pokemon data
+<div id='PokemonData'>
+
+  <div ng-if='pokemon === undefined'>
+    {{ getAllPokemon() }}
+    <div class='well WellShadow'>
+      <h3>Pokemon Directory</h3>
+      <p>
+        This page is (really could be) used as a way to find pokemon pages.
+        Those pages contain extra details about that individual pokemon that might
+        be less relevent when adding them to a team, but still might be interesting enough
+        to want to know.
+      </p>
+      <hr />
+      <p>
+        This page was really a proof of concept for myself. I'd never really played with
+        routing before as it had never been a piece of angular I got to play with, so I wanted
+        to try it out. This page is less polished than the main site page.
+      </p>
+    </div>
+    <div id='Directory'>
+      <ul>
+        <div ng-repeat='name in pokedex'>
+          <li id='AllPokemon'><a ui-sref='pokemon({pokemon: "{{name}}"})' >{{ name }}</a></li>
+        </div>
+      </ul>
+    </div>
+  </div>
+
+  <div ng-show='loading'>
+    Gathering pokemon info ....
+  </div>
+  <div ng-show='!loading' ng-if='pokemon !== undefined'>
+    {{ getPokemon(pokemon) }}
+
+    <div id='PokemonDataDisplay' class='well WellShadow'>
+
+      <h3 id='PokemonName'>{{ pkmn_result.name }}</h3>
+
+      <div class="well">
+        <img alt="{{ pkmn_result.name }}" ng-src="{{ pkmn_result.sprites.front_default  || '' }}"/>
+      </div>
+      <div>
+        <table class='table table-stripped'>
+          <thead>
+            <tr>
+              <th>Stat</th>
+              <th>Value (Base)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat='stat in pkmn_result.stats'>
+              <td>{{ stat.stat.name }}</td>
+              <td>{{ stat.base_stat }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <ul class='well'>
+        <h4>Moves</h4>
+      <div ng-repeat='move in pkmn_result.moves'>
+        <li>{{ move.move.name }}</li>
+      </div>
+      </ul>
+    </div>
+  </div>
+
 </div>

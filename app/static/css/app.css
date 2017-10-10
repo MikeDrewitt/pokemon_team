@@ -1,21 +1,57 @@
 
+html, body {
+  height: 100%;
+  background-color: #EEE;
+}
+
 li {
   padding: 5px;
+}
+
+.Center {
+  margin: auto;
+  width: 50%
+}
+
+.DetailsDropDown {
+  margin-bottom: 0;
 }
 
 .FlexContainer {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: center;
+}
+
+.Statsbox {
+  margin: 10px;
+}
+
+.ToggleButton {
+  margin: 10px;
 }
 
 .WellShadow {
-  box-shadow: 3px 3px 0px 0px #CCC;
+  box-shadow: 3px 3px 0px 0px #888;
+  background-color: #FFF;
 }
 
 #AddPokemon {
-  margin-top: 10px;
+  margin-top: 15px;
+}
+
+#AllPokemon {
+  padding: 0;
+}
+
+#Directory {
+  
+}
+
+#ImportantInfo {
+  font-weight: bolder;
+  color: red;
 }
 
 #MainContent {
@@ -38,6 +74,10 @@ li {
 #PokemonCard {
   padding: 10px;
   width: 350px;
+}
+
+#PokemonContainer {
+  max-width: 1200px;
 }
 
 #PokemonImage {

@@ -1,16 +1,96 @@
-<img alt="{{ $ctrl.pokemon.name }}" ng-src="{{ $ctrl.pokemon.sprites.front_default  || '' }}"/>
-<hr />
-name: <a href="#" class="names">{{ $ctrl.pokemon.name }}</a>
-<br />
-height: {{ $ctrl.pokemon.height }} ft
-<br />
-weight: {{ $ctrl.pokemon.weight }} lbs
-<br />
-<div ng-repeat='stat in $ctrl.pokemon.stats'>
-  {{ stat.stat.name }} - {{ stat.base_stat }}
+<div id='PokemonModal'>
+  <h4 id='PokemonName'><a ui-sref='pokemon({ pokemon: $ctrl.pokemon.name })'>{{ $ctrl.pokemon.name }}</a></h4>
+  <div class='Center FlexContainer'>
+    <img alt="{{ $ctrl.pokemon.name }}" ng-src="{{ $ctrl.pokemon.sprites.front_default  || '' }}"/>
+  </div>
+
+  <div class="panel-group DetailsDropDown" id='StatsPanel'>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h5 class="panel-title">
+          <a title='Click to Expand/ Collapse' data-toggle="collapse" href="#StatsCollapsable">Pokemon Statistics</a>
+        </h5>
+      </div>
+
+      <div id="StatsCollapsable" class="panel-collapse collapse">
+        <div class="panel-body">
+          <table class='table table-stripped'>
+            <thead>
+              <tr>
+                <th>Stat</th>
+                <th>Value (Base)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat='stat in $ctrl.pokemon.stats'>
+                <td>{{ stat.stat.name }}</td>
+                <td>{{ stat.base_stat }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel-group DetailsDropDown" id='MovesPanel'>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h5 class="panel-title">
+          <a title='Click to Expand/ Collapse' data-toggle="collapse" href="#MovesCollapsable">Pokemon Move Pool</a>
+        </h5>
+      </div>
+      <div id="MovesCollapsable" class="panel-collapse collapse">
+        <div class="panel-body">
+          <table class='table table-stripped'>
+            <thead>
+              <tr>
+                <th>Move</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat='move in $ctrl.pokemon.moves'>
+                <td>{{ move.move.name }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel-group" id='Abilities'>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h5 class="panel-title">
+          <a title='Click to Expand/ Collapse' data-toggle="collapse" href="#AbilitiesCollapsable">Pokemon Abilities</a>
+        </h5>
+      </div>
+      <div id="AbilitiesCollapsable" class="panel-collapse collapse">
+        <div class="panel-body">
+          <table class='table table-stripped'>
+            <thead>
+              <tr>
+                <th>Ability</th>
+                <th>Hidden</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat='ability in $ctrl.pokemon.abilities'>
+                <td>{{ ability.ability.name }}</td>
+                <td>{{ ability.is_hidden }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <h5>Type(s)</h5>
+  <ul>
+    <div ng-repeat='type in $ctrl.pokemon.types'>
+      <li>{{ type.type.name }}</li>
+    </div>
+  </ul>
+  <br />
 </div>
-<br />
-<div ng-repeat='type in $ctrl.pokemon.types'>
-  type(s): {{ type.type.name }}
-</div>
-<br />

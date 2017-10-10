@@ -1,7 +1,7 @@
 (function(angular) {
   function PokemonSearchController($scope, $http) {
       var ctrl = this;
-      
+
       ctrl.url = 'https://pokeapi.co/api/v1/pokedex/';        // used for v1 of api
       ctrl.url2 = 'https://pokeapi.co/api/v2/pokemon/';       // used for v2 of api
 
@@ -23,14 +23,12 @@
         $http({method: 'GET', url: ctrl.url}).
         then(function(response) {
           // populates the pokedex with just the names of pokes. Used for searching
-          ctrl.status = response.status;
           for (let i = 0; i < response.data.objects[0].pokemon.length; i++) {
             let pkmn = response.data.objects[0].pokemon[i];
             ctrl.pokedex.push(pkmn.name);
           }
         }, function(response) {
           ctrl.all_characters = response.all_characters || 'Request failed';
-          ctrl.status = response.status;
         });
       }
 
