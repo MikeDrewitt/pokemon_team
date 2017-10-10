@@ -1,7 +1,9 @@
 (function() {
+
   angular
-    .module('pokedex.config', ['ui.router', 'ngAnimate', 'ngSanitize', 'ui.bootstrap'])
+    .module('Pokedex', ['ui.router', 'ui.bootstrap'])
     .constant('urlConstant', { baseUrl: 'http://localhost:8080' })
+    .controller('mainCtrl', function($rootScope, $state) {})
     .config(function($urlRouterProvider, $stateProvider, $locationProvider) {
       $stateProvider
       .state('my_team', {
@@ -16,11 +18,4 @@
       })
       $urlRouterProvider.otherwise('/');
   });
-
-  angular
-    .module('Pokedex')
-    .run(run);
-    run.$inject = ['$rootScope', '$location'];
-
-    function run($rootScope, $locatiom) { /* On load here. */ }
 })();

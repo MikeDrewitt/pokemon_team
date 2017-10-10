@@ -1,16 +1,17 @@
 (function(angular) {
   function MyPokemonController($scope) {
 
-    $scope.live_pokemon = null;                 // used to show the currently being edited mon'
+    let ctrl = this;
+    ctrl.live_pokemon = null;                 // used to show the currently being edited mon'
 
     // A flag telling us if we have any pkmns.
-    $scope.checkPokemonView = function() {
-      $scope.noPokemon = !($scope.$ctrl.team.pokemon.length < 1);
+    ctrl.checkPokemonView = function() {
+      ctrl.noPokemon = !(ctrl.$ctrl.team.pokemon.length < 1);
     }
 
-    $scope.removeFromTeam = function(pokemon) {
+    ctrl.removeFromTeam = function(pokemon) {
       let current_index = pokemon.index;
-      let team = $scope.$ctrl.team;
+      let team = ctrl.team;
 
       team.pokemon.splice(current_index, 1);
 
@@ -30,8 +31,9 @@
     };
 
     // moves pokemons placement on the team up and down.
-    $scope.indexUp = function(pokemon) {
-      let team = $scope.$ctrl.team;
+    ctrl.indexUp = function(pokemon) {
+
+      let team = ctrl.team;
       try {
         let current_index = pokemon.index;
         if (current_index == 0) return;
@@ -40,11 +42,11 @@
         team.pokemon[current_index - 1] = {...pokemon, index: current_index - 1};
         team.pokemon[current_index] = {...temp, index: current_index};
 
-        // console.log($scope.team.pokemon);
+        // console.log(ctrl.team.pokemon);
       } catch (err) {}
     };
-    $scope.indexDown = function(pokemon) {``
-      let team = $scope.$ctrl.team;
+    ctrl.indexDown = function(pokemon) {``
+      let team = ctrl.team;
       try {
         let current_index = pokemon.index;
         let temp = team.pokemon[current_index + 1];
@@ -53,16 +55,16 @@
         team.pokemon[current_index + 1] = {...pokemon, index: current_index + 1};
         team.pokemon[current_index] = {...temp, index: current_index};
 
-        // console.log($scope.team.pokemon);
+        // console.log(ctrl.team.pokemon);
       } catch (err) {}
     };
 
     // shows a small amout of details of a single pokemon
-    $scope.viewPokemon = function(pokemon) {
-      $scope.live_pokemon = pokemon;
+    ctrl.viewPokemon = function(pokemon) {
+      ctrl.live_pokemon = pokemon;
     };
-    $scope.closePokemon = function() {
-      $scope.live_pokemon = null;
+    ctrl.closePokemon = function() {
+      ctrl.live_pokemon = null;
     };
 };
 
