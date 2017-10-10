@@ -72,5 +72,5 @@
     bindings: {
       team: '=',
     }
-  });
+  }).controller('MyPokemonController', MyPokemonController);
 })(window.angular);

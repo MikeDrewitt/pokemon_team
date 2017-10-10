@@ -1,2 +1,8 @@
-var Pokedex = angular.module('Pokedex', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']);
-Pokedex.controller('Pokedex', function($scope, $http) {});
+(function() {
+  'use strict';
+
+  angular.module('Pokedex', ['ui.router', 'ngAnimate', 'ngSanitize', 'ui.bootstrap'])
+  .config(function($urlRouterProvider) {
+    $urlRouterProvider.otherwise("/");
+  })
+})();

@@ -139,5 +139,5 @@
     bindings: {
       team: '<'
     }
-  });
+  }).controller('TeamDataController', TeamDataController);
 })(window.angular);

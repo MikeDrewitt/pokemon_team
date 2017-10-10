@@ -12,5 +12,5 @@
       pokemon: '=',
       hasMoves: '<'
     }
-  });
+  }).controller('LivePokemonController', LivePokemonController);
 })(window.angular);

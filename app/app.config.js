@@ -1,37 +1,21 @@
 (function() {
   angular
-      .module('teddybeartalker.config', [
-          'ui.router'
-      ])
-
-      .constant('urlConstant', {
-        baseUrl: 'http://localhost:8000'
-      })
-
-
-  .config(function($urlRouterProvider, $stateProvider, $locationProvider) {
-      //$locationProvider.html5Mode(false);
+    .module('pokedex.config', ['ui.router', 'ngAnimate', 'ngSanitize', 'ui.bootstrap'])
+    .constant('urlConstant', { baseUrl: 'http://localhost:8080' })
+    .config(function($urlRouterProvider, $stateProvider, $locationProvider) {
       $stateProvider
       .state('home', {
-          url: '/',
-          templateUrl: '/components/components/container.tpl.html',
-          controller: 'PokedexController'
-      })
-      .state('settings', {
-          url: '/pokemon/:pokemon',
-          templateUrl: '/components/pokemon/pokemonInfo.tpl.html',
-          controller: 'PokemonController'
+        url: '/',
+        templateUrl: '/components/container/container.tpl.html',
+        controller: 'ContainerController'
       })
       $urlRouterProvider.otherwise('/');
   });
 
-  /**
-   * Run block
-   */
   angular
-      .module('Pokedex')
-      .run(run);
-      run.$inject = ['$rootScope', '$location'];
+    .module('Pokedex')
+    .run(run);
+    run.$inject = ['$rootScope', '$location'];
 
-      function run($rootScope, $locatiom) { /* On load here. */ }
+    function run($rootScope, $locatiom) { /* On load here. */ }
 })();

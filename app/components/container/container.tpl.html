@@ -1,9 +1,9 @@
-<div ng-controller='Pokedex'>
-  <pokemon-search team='$ctrl.team'></pokemon-search>
+<div ng-controller='mainCtrl'>
+  <pokemon-search team='team'></pokemon-search>
   <div class='container-fluid' id='MainContent'>
 
     <!-- Displays if there are no pkmn on the team, explains application -->
-    <div class='well WellShadow' ng-if='$ctrl.team.pokemon.length < 1'>
+    <div class='well WellShadow' ng-if='team.pokemon.length < 1'>
       <h3>Pokemon Team Statistics Application</h3>
       <p>
         This application will help show team statistics for all pokemon in party based on types, stats, and other characteristics of the team.
@@ -11,9 +11,9 @@
     </div>
 
     <!-- The meaty part of the app, when we actually have data -->
-    <div ng-if='$ctrl.team.pokemon.length > 0'>
-      <my-pokemon  team='$ctrl.team'></my-pokemon>
-      <team-data team='$ctrl.team' ></team-data>
+    <div ng-if='team.pokemon.length > 0'>
+      <my-pokemon  team='team'></my-pokemon>
+      <team-data team='team' ></team-data>
     </div>
   </div>
 

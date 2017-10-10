@@ -1,15 +1,13 @@
 (function() {
 
-  function ContainerController() {
+  function ContainerController($scope) {
 
-    var ctrl = this;
-    ctrl.team = {pokemon: [], types: {}};     // team of pokemon (should never be > 6)
-
+    $scope.team = {pokemon: [], types: {}};     // team of pokemon (should never be > 6)
   };
 
-  angular.module('Pokedex').component('container', {
+  angular.module('pokedex.config').component('container', {
     templateUrl: './components/container/container.tpl.html',
     controller: ContainerController,
     bindings: { }
-  });
+  }).controller('ContainerController', ContainerController);
 })(window.angular);
