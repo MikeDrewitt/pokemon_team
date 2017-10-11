@@ -1,12 +1,12 @@
 (function(angular) {
-  function MyPokemonController($scope) {
+  function MyPokemonController() {
 
     let ctrl = this;
     ctrl.live_pokemon = null;                 // used to show the currently being edited mon'
 
     // A flag telling us if we have any pkmns.
     ctrl.checkPokemonView = function() {
-      ctrl.noPokemon = !(ctrl.$ctrl.team.pokemon.length < 1);
+      ctrl.noPokemon = !(ctrl.team.pokemon.length < 1);
     }
 
     ctrl.removeFromTeam = function(pokemon) {
@@ -45,18 +45,17 @@
         // console.log(ctrl.team.pokemon);
       } catch (err) {}
     };
-    ctrl.indexDown = function(pokemon) {``
+    ctrl.indexDown = function(pokemon) {
       let team = ctrl.team;
-      try {
-        let current_index = pokemon.index;
-        let temp = team.pokemon[current_index + 1];
-        if (current_index === 5 || temp.name === undefined) return;
 
-        team.pokemon[current_index + 1] = {...pokemon, index: current_index + 1};
-        team.pokemon[current_index] = {...temp, index: current_index};
+      let current_index = pokemon.index;
+      let temp = team.pokemon[current_index + 1];
+      if (current_index === 5 || temp.name === undefined) return;
 
-        // console.log(ctrl.team.pokemon);
-      } catch (err) {}
+      team.pokemon[current_index + 1] = {...pokemon, index: current_index + 1};
+      team.pokemon[current_index] = {...temp, index: current_index};
+
+      // console.log(ctrl.team.pokemon);
     };
 
     // shows a small amout of details of a single pokemon

@@ -52,7 +52,6 @@
 
       ctrl.addToTeam = function(pokemon) {
         // This adds the param poke to the team if there are slots availible.
-        $("#myModal").modal("hide");
         if (ctrl.team.pokemon.length < 6) {
           ctrl.team.pokemon.push({...pokemon, index: ctrl.team.pokemon.length, myMoves: new MovePool('', '', '', '')});
 

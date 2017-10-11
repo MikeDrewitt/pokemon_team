@@ -14,7 +14,7 @@
         <!-- Probably should be it's own component -->
         <div ng-show='$ctrl.pkmn_result.name !== undefined' class='well'>
           <live-pokemon pokemon='$ctrl.pkmn_result'></live-pokemon>
-          <button title='Add to team!' class='btn btn-success' ng-click='$ctrl.addToTeam($ctrl.pkmn_result)'><span class='glyphicon glyphicon-plus'></span></button>
+          <button title='Add to team!' class='btn btn-success' ng-click='$ctrl.addToTeam($ctrl.pkmn_result); $("#myModal").modal("hide");'><span class='glyphicon glyphicon-plus'></span></button>
           <button title='Close window.' class='btn btn-danger' data-dismiss="modal" ng-click='$ctrl.closeSearch()'><span class='glyphicon glyphicon-remove-sign'></span></button>
         </div>
 

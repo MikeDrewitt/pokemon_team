@@ -1,5 +1,5 @@
 <div id='PokemonModal'>
-  <h4 id='PokemonName'><a ui-sref='pokemon({ pokemon: $ctrl.pokemon.name })'>{{ $ctrl.pokemon.name }}</a></h4>
+  <h4 id='PokemonName'><a ui-sref='pokemon({ pokemon: $ctrl.pokemon.name })' ng-click="$("#myModal").modal("hide");$("#PokemonDetails").modal("hide");">{{ $ctrl.pokemon.name }}</a></h4>
   <div class='Center FlexContainer'>
     <img alt="{{ $ctrl.pokemon.name }}" ng-src="{{ $ctrl.pokemon.sprites.front_default  || '' }}"/>
   </div>

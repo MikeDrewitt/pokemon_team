@@ -6,7 +6,7 @@ available moves for each Pokemon, etc.
 
 A live site can be found [here](http://pokemonteamdetails.appspot.com/#!/)!
 
-![Application screenshot](screeny.png?raw=true "Application screenshot")
+![Application screenshot](screenshot.png?raw=true "Application screenshot")
 
 # Getting started
 

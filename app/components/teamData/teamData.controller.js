@@ -47,37 +47,31 @@
 
     // calulates and populates the respective stats objects
     ctrl.mathStats = function() {
-      let running_speed = 0,
-      running_sp_atk = 0,
-      running_sp_def = 0,
-      running_atk = 0,
-      running_def = 0,
-      running_hp = 0;
+      let running_stats = [0, 0, 0, 0, 0, 0];
 
       for (let i = 0; i < ctrl.team.pokemon.length; i++) {
         // console.log('speed', ctrl.team.pokemon[i].stats[0]);
         if (ctrl.team.pokemon[i].stats[0].base_stat === undefined) continue;
-        running_speed += ctrl.team.pokemon[i].stats[0].base_stat;
-        running_sp_atk += ctrl.team.pokemon[i].stats[1].base_stat;
-        running_sp_def += ctrl.team.pokemon[i].stats[2].base_stat;
-        running_atk += ctrl.team.pokemon[i].stats[3].base_stat;
-        running_def += ctrl.team.pokemon[i].stats[4].base_stat;
-        running_hp += ctrl.team.pokemon[i].stats[5].base_stat;
+
+        for (let j = 0; j < ctrl.team.pokemon[i].stats.length; j++) {
+          running_stats[j] += ctrl.team.pokemon[i].stats[j].base_stat;
+        }
       }
 
-      ctrl.sumStats['speed'] = running_speed;
-      ctrl.sumStats['sp_atk'] = running_sp_atk;
-      ctrl.sumStats['sp_def'] = running_sp_def;
-      ctrl.sumStats['atk'] = running_atk;
-      ctrl.sumStats['def'] = running_def;
-      ctrl.sumStats['hp'] = running_speed;
+      // This is not the best way to do this, but I'm tierd. Might come back and make this more clean.
+      ctrl.sumStats['speed'] = running_stats[0];
+      ctrl.sumStats['sp_atk'] = running_stats[1];
+      ctrl.sumStats['sp_def'] = running_stats[2];
+      ctrl.sumStats['atk'] = running_stats[2];
+      ctrl.sumStats['def'] = running_stats[3];
+      ctrl.sumStats['hp'] = running_stats[5];
 
-      ctrl.averageStats['speed'] = Math.round(running_speed / ctrl.team.pokemon.length);
-      ctrl.averageStats['sp_atk'] = Math.round(running_sp_atk / ctrl.team.pokemon.length);
-      ctrl.averageStats['sp_def'] = Math.round(running_sp_def / ctrl.team.pokemon.length);
-      ctrl.averageStats['atk'] = Math.round(running_atk / ctrl.team.pokemon.length);
-      ctrl.averageStats['def'] = Math.round(running_def / ctrl.team.pokemon.length);
-      ctrl.averageStats['hp'] = Math.round(running_hp / ctrl.team.pokemon.length);
+      ctrl.averageStats['speed'] = Math.round(running_stats[0] / ctrl.team.pokemon.length);
+      ctrl.averageStats['sp_atk'] = Math.round(running_stats[1] / ctrl.team.pokemon.length);
+      ctrl.averageStats['sp_def'] = Math.round(running_stats[2] / ctrl.team.pokemon.length);
+      ctrl.averageStats['atk'] = Math.round(running_stats[3] / ctrl.team.pokemon.length);
+      ctrl.averageStats['def'] = Math.round(running_stats[4] / ctrl.team.pokemon.length);
+      ctrl.averageStats['hp'] = Math.round(running_stats[5] / ctrl.team.pokemon.length);
     }
 
     var previousType = undefined;

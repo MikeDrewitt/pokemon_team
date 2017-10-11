@@ -45,10 +45,6 @@ li {
   padding: 0;
 }
 
-#Directory {
-  
-}
-
 #ImportantInfo {
   font-weight: bolder;
   color: red;
@@ -60,9 +56,6 @@ li {
 
 #MoveSelector {
   margin: 3px;
-}
-
-#Navbar {
 }
 
 #MoveSelectors {
