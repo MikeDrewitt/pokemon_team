@@ -14,6 +14,9 @@
 
       ctrl.pokedex = [];                        // populated from the API as to always be up to date.
 
+      // close modal
+      ctrl.close = function(result){ dialog.close(result); };
+
       // Runs on focusing search box to populate $pokedex with a list of pokemon.
       ctrl.getAllPokemon = function() {
 
@@ -52,6 +55,7 @@
 
       ctrl.addToTeam = function(pokemon) {
         // This adds the param poke to the team if there are slots availible.
+
         if (ctrl.team.pokemon.length < 6) {
           ctrl.team.pokemon.push({...pokemon, index: ctrl.team.pokemon.length, myMoves: new MovePool('', '', '', '')});
 

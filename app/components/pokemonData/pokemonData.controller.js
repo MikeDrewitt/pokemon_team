@@ -18,11 +18,12 @@
             for (let i = 0; i < response.data.objects[0].pokemon.length; i++) {
               let pkmn = response.data.objects[0].pokemon[i];
               $scope.pokedex.push(pkmn.name);
+              $scope.loading = false;
             }
           }, function(response) {
             $scope.all_characters = response.all_characters || 'Request failed';
+            $scope.loading = false;
           });
-          $scope.loading = false;
         }
         else {
           $http({
@@ -30,10 +31,11 @@
             url: url2 + $scope.pokemon
           }).then(function successCallback(response) {
             $scope.pkmn_result = response.data;
+            $scope.loading = false;
           }, function errorCallback(response) {
+            $scope.loading = false;
             alert('Something happened between here and the API, please reload.');
           })
-          $scope.loading = false;
         }
       };
 };

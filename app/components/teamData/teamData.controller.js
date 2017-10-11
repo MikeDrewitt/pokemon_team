@@ -7,8 +7,8 @@
     ctrl.double_damage_to = [];                       // list of stuff that we have strong atk against
     ctrl.double_damage_from = [];                     // list of stuff that we have weak def against
 
-    ctrl.showStrengths = true;                        // default showing bool
-    ctrl.showWeaknesses = true;                       // default showing bool
+    ctrl.showStrengths = false;                        // default showing bool
+    ctrl.showWeaknesses = false;                       // default showing bool
     ctrl.showData = true;                            // true for averge view false for sum
 
     ctrl.sumStats = new Stats(0, 0, 0, 0, 0, 0);      // zeros all stats for recalculation && init
@@ -22,7 +22,6 @@
       @params -
         damage_field: the name of the subobjest in the API that refers to the type of damage
                       modifyer we want to access. ie: half_damage_to, double_damage_from, etc.
-
       @returns - an array of stats modifyers and counts for how often the appear for the team.
     */
     ctrl.findDamageInfo = function(damage_field) {

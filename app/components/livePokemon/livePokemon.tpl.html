@@ -1,7 +1,7 @@
 <div id='PokemonModal'>
-  <h4 id='PokemonName'><a ui-sref='pokemon({ pokemon: $ctrl.pokemon.name })' ng-click="$("#myModal").modal("hide");$("#PokemonDetails").modal("hide");">{{ $ctrl.pokemon.name }}</a></h4>
+  <h4 id='PokemonName'><a ui-sref='pokemon({ pokemon: $ctrl.pokemon.name })' ng-click='$("#myModal").modal("hide");$("#PokemonDetails").modal("hide");'>{{ $ctrl.pokemon.name }}</a></h4>
   <div class='Center FlexContainer'>
-    <img alt="{{ $ctrl.pokemon.name }}" ng-src="{{ $ctrl.pokemon.sprites.front_default  || '' }}"/>
+    <img class='img-thumbnail'alt="{{ $ctrl.pokemon.name }}" ng-src="{{ $ctrl.pokemon.sprites.front_default  || '' }}"/>
   </div>
 
   <div class="panel-group DetailsDropDown" id='StatsPanel'>
@@ -87,10 +87,10 @@
 
 
   <h5>Type(s)</h5>
-  <ul>
-    <div ng-repeat='type in $ctrl.pokemon.types'>
-      <li>{{ type.type.name }}</li>
-    </div>
-  </ul>
+  <div>
+    <span ng-repeat='type in $ctrl.pokemon.types'>
+      <span class='Typebox Type_{{type.type.name}}'>{{ type.type.name }}</span>
+    </span>
+  </div>
   <br />
 </div>

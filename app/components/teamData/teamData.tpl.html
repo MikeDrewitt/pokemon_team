@@ -48,14 +48,14 @@
 
     <div id='typeTable'>
       <div>
-        <button class='btn ToggleButton' ng-click='$ctrl.toggleStrengths()'>Toggle Team Strength</button>
-        <button class='btn ToggleButton' ng-click='$ctrl.toggleWeaknesses()'>Toggle Team Strength</button>
+        <button class='btn ToggleButton' ng-click='$ctrl.toggleStrengths()'>Toggle Team Strengths</button>
+        <button class='btn ToggleButton' ng-click='$ctrl.toggleWeaknesses()'>Toggle Team Weaknesses</button>
         <div class='FlexContainer'>
           <div ng-show='$ctrl.showStrengths' class='well WellShadow Statsbox'>
             <h4>Strongest attacking against</h4>
             <ol>
               <div ng-repeat='type in $ctrl.double_damage_to | orderBy: "count" | limitTo:5'>
-                <li>{{ type.name }}</li>
+                <li class="Typebox Type_{{type.name}} text-center">{{ type.name }}</li>
               </div>
             </ol>
           </div>
@@ -63,7 +63,7 @@
             <h4>Strongest defending against</h4>
             <ol>
               <div ng-repeat='type in $ctrl.half_damage_from | orderBy: "count" | limitTo:5'>
-                <li>{{ type.name }}</li>
+                <li class="Typebox Type_{{type.name}} text-center">{{ type.name }}</li>
               </div>
             </ol>
           </div>
@@ -71,7 +71,7 @@
             <h4>Weakest attacking against</h4>
             <ol>
               <div ng-repeat='type in $ctrl.half_damage_to | orderBy: "count" | limitTo:5'>
-                <li>{{ type.name }}</li>
+                <li class="Typebox Type_{{type.name}} text-center">{{ type.name }}</li>
               </div>
             </ol>
           </div>
@@ -79,7 +79,7 @@
               <h4>Weakest defending against</h4>
               <ol>
                 <div ng-repeat='type in $ctrl.double_damage_from | orderBy: "count" | limitTo:5'>
-                  <li>{{ type.name }}</li>
+                  <li class="Typebox Type_{{type.name}} text-center">{{ type.name }}</li>
                 </div>
               </ol>
             </div>

@@ -12,7 +12,7 @@ A live site can be found [here](http://pokemonteamdetails.appspot.com/#!/)!
 
 Assuming that you have npm/ yarn installed this should be very easy (hopefully)! Run
 
-```npm install```
+``` npm install ```
 
 in the root of the repository to install all project dependancies. Then run
 
@@ -24,6 +24,17 @@ to run the local development server. It should be located at localhost:8080.
 
 If it's the case that you either don't have npm installed or have never heard of it
 you should be able to find a link to their documentation for installation [here](https://www.npmjs.com/get-npm).
+
+# Testing
+
+You need to have karma-cli tools installed for the easiest method of utilizing the test suit. Assuming you ran npm install,
+you should be good to go, but if you run into errors you can always install karma globally by
+
+``` npm -g karma-cli ```
+
+Once karma is installed you can run the test suit with the command
+
+``` karma start ```
 
 # Stuff I'd like to see done/ Personal notes.
 
@@ -40,6 +51,9 @@ Between generations of the games a lot changes so the stats should reflect that 
 Obviously given more time I'd also like to create a backend for this to allow users to sign in and save multiple teams
 to be viewed and updated at later times. Perhaps using something like OAuth to allow users to sign in via google, facebook, etc. The CSS and UX
 could also use a fair bit of work in some areas to make it not only more user friendly, but also more aesthetically pleasing for the majority of users.
+
+Lastly, making the whole page more mobile friendly would be a first thing to do next should I spend any more time on this. Bootstrap keeps it
+from really going off the rails as far as responsiveness goes, but it certainly could be much better.
 
 With all of this said, I feel the application as it stands suffices in showing off what angularjs can do given a limited amount of time
 and resources.
